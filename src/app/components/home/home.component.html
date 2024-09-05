@@ -1,0 +1,115 @@
+<!-- ! main slider -->
+<section class="my-4">
+  <div class="row g-0">
+    <div class="col-md-9">
+      <owl-carousel-o [options]="customOptionsmain">
+        <ng-template carouselSlide>
+          <img
+            height="300"
+            src="./assets/images/slider-image-1.jpeg"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            height="300"
+            src="./assets/images/playstation.jpeg"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            height="300"
+            src="./assets/images/banner-4.jpeg"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            height="300"
+            src="./assets/images/blog-img-1.jpeg"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            height="300"
+            src="./assets/images/blog-img-2.jpeg"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div class="col-md-3">
+      <img
+        height="150"
+        src="./assets/images/slider-image-2.jpeg"
+        class="w-100"
+        alt=""
+      />
+      <img
+        height="150"
+        src="./assets/images/slider-image-3.jpeg"
+        class="w-100"
+        alt=""
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ! cat -->
+
+@if(loadCategory){
+<section class="my-4">
+  <h4 class="text-center text-main my-2">Pouplar categories</h4>
+  <owl-carousel-o [options]="customOptions">
+    <ng-container>
+      @for (cat of AllCategores; track $index) {
+      <ng-template carouselSlide [id]="cat._id">
+        <img
+          [routerLink]="['/CatDetails', cat._id]"
+          height="250px"
+          class="w-100"
+          [src]="cat.image"
+          [alt]="cat.name"
+        />
+      </ng-template>
+      }
+    </ng-container>
+  </owl-carousel-o>
+</section>
+
+}
+
+<!-- ! Product -->
+
+
+@if(loadproduct){
+<section class="producthome my-4">
+
+
+  <input [(ngModel)]="text" placeholder="Search By Name " class="form-control w-50 m-auto my-3" type="text">
+  <h4 class="text-center text-main mb-3">Pouplar products</h4>
+
+  <div class="row g-3">
+    
+    @for (product of Allproduct.slice(0,12) | search:text ; track product.id) {
+    <div class="col-md-2">
+    
+      <app-sharedproduct  [shareproduct]="product" ></app-sharedproduct>
+    </div>
+    }
+    @if(msgErrorApi){
+      <p class="text-center alert alert-danger m-0 p-2">{{ msgErrorApi }}</p>
+      } @if(msgErrorApicat){
+      <p class="text-center alert alert-danger m-0 p-2">{{ msgErrorApi }}</p>
+      }
+  </div>
+</section>
+
+}

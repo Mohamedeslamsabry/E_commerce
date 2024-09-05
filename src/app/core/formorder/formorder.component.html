@@ -1,0 +1,42 @@
+<section class="shadow-lg rounded-4 bg-main-ligth p-3 my-5 w-75 m-auto">
+    <form   (ngSubmit)="submitformorder()" [formGroup]="shippingAddress" >
+        <div class="my-2">
+            <label for="details">details</label>
+            <textarea maxlength="100"  formControlName="details"  class="form-control " type="text" name="details" id="details"></textarea>
+            @if(shippingAddress.get('details')?.getError&&shippingAddress.get('details')?.touched){
+                @if(shippingAddress.get('details')?.getError('required')){
+                    <p class="alert alert-danger">This input is requires</p>
+                }
+                @if(shippingAddress.get('details')?.getError('maxlength')){
+                    <p class="alert alert-danger">This input is max length 100 character</p>
+                }
+            }
+        </div>
+        <div class="my-2">
+            <label for="phone">phone</label>
+            <input formControlName="phone" class="form-control " type="tel" name="phone" id="phone">
+            @if(shippingAddress.get('phone')?.getError&&shippingAddress.get('phone')?.touched){
+                @if(shippingAddress.get('phone')?.getError('required')){
+                    <p class="alert alert-danger">This input is requires</p>
+                }
+                @if(shippingAddress.get('phone')?.getError('pattern')){
+                    <p class="alert alert-danger">number Egyption 11 number</p>
+                }
+            }
+        </div>
+        <div class="my-2">
+            <label for="city">city</label>
+            <input formControlName="city" class="form-control " type="text" name="city" id="city">
+            @if(shippingAddress.get('city')?.getError&&shippingAddress.get('city')?.touched){
+                @if(shippingAddress.get('city')?.getError('required')){
+                    <p class="alert alert-danger">This input is requires</p>
+                }
+              
+            }
+        </div>
+        <button class="btn-main w-100">Check Out</button>
+    </form>
+</section>
+
+
+

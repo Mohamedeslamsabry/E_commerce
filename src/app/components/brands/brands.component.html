@@ -1,0 +1,20 @@
+@if(loadbrands){
+    <section class="producthome my-4">
+      <h4 class=" text-center text-main my-1">Pouplar Brands </h4>
+    
+      <div class="row g-3">
+        @for (brand of Allbrand; track brand._id) {
+        <div class="col-md-2">
+          <div class="product">
+            <div [routerLink]="['/brandDetails',brand._id]">
+              <img [src]="brand.image" class="w-100" [alt]="brand.name" />
+              <p class="text-main p-2">{{ brand.slug }}</p>
+            </div>
+          </div>
+
+        </div>
+        }
+      </div>
+    </section>
+  }
+  

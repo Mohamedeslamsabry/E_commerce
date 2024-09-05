@@ -1,0 +1,52 @@
+@if(Allwishlist.length!==0){
+  <section class="wishlist my-4">
+  
+    <div class="row g-3 justify-content-center">
+      <h4 class="text-center text-success">total product in wishlist :{{allproduct}}</h4>
+      @for (wishlist of Allwishlist ; track wishlist.id) {
+      <div class="col-lg-3">
+
+        <div class="product">
+          <span (click)="removetowishlist(wishlist.id)"  class="d-flex justify-content-around pt-2 align-items-center">
+            <i class="fa-solid fa-heart-crack fa-xl cr py-1 text-danger"></i>
+            <span class="text-main">remove to wishlist</span>
+          </span>
+
+          <div [routerLink]="['/details', wishlist.id]">
+            <img
+              [src]="wishlist.imageCover"
+              class="w-100"
+              [alt]="wishlist.title"
+            />
+            <p class="text-main p-2">{{ wishlist.category.name }}</p>
+            <h3 class="small p-2">{{ wishlist.title.split(" ", 2).join(" ") }}</h3>
+            <div class="p-2 d-flex justify-content-between align-items-center">
+              <span>{{ wishlist.price }}</span>
+              <div class="d-flex align-items-center">
+                @for (num of [1,2,3,4,5] .slice(0,wishlist.ratingsAverage) ; track
+                $index) {
+                <span> <i class="fas fa-star rating-color"></i></span>
+                } @if(wishlist.ratingsAverage%1!==0){
+                <i class="fa-solid fa-star-half-stroke rating-color"></i>
+                }
+                <span>{{ wishlist.ratingsAverage }}</span>
+              </div>
+            </div>
+          </div>
+        
+          <button (click)="addproducttocart(wishlist.id)" class="btn-main w-100">
+            Add to Cart
+          </button>
+        </div>
+     </div>
+      }
+     
+    </div>
+
+  </section>
+}
+
+@else {
+  <h5>No product in wishlist !!!! if you want all product</h5>
+  <button class="btn-main" routerLink="/home">Go to add buy product</button>
+} 

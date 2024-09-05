@@ -1,0 +1,65 @@
+<div class="product">
+ 
+<!--   <span (click)="addtowishlist(shareproduct.id)"  class="d-flex justify-content-around pt-2 align-items-center">
+
+      @if (coloricon) {
+      <i class="fa-solid fa-heart fa-xl cr py-1  text-warning" ></i>
+     }
+
+     @else {
+      <i class="fa-solid fa-heart fa-xl cr py-1  text-danger" ></i>
+    }   
+
+
+ 
+
+  <span class="text-main">add to wishlist</span>
+</span> -->
+
+
+@if (wishlistdata.includes($any(shareproduct.id))) {
+   <span class="d-flex align-items-center justify-content-evenly py-1">
+    <i (click)="removeowishlist(shareproduct.id)" class="fa-solid fa-heart fa-xl cr py-1  text-warning" ></i>
+    <span> remove to wishlist</span>
+   </span>
+}
+
+@if(!wishlistdata.includes($any(shareproduct.id))){
+  <span class="d-flex align-items-center justify-content-evenly py-1">
+    <i (click)="addtowishlist(shareproduct.id)" class="fa-solid fa-heart fa-xl cr py-1  text-danger" ></i>
+   <span> add to wishlist</span>
+   </span>
+}
+  <div [routerLink]="['/details', shareproduct.id]">
+    <img
+      [src]="shareproduct.imageCover"
+      class="w-100"
+      [alt]="shareproduct.title"
+    />
+    <p class="text-main p-2">{{ shareproduct.category.name }}</p>
+    <h3 class="small p-2">{{ shareproduct.title.split(" ", 2).join(" ") }}</h3>
+    <div class="p-2 d-flex justify-content-between align-items-center">
+      <span>{{ shareproduct.price }}</span>
+      <div class="d-flex align-items-center">
+        @for (num of [1,2,3,4,5] .slice(0,shareproduct.ratingsAverage) ; track
+        $index) {
+        <span> <i class="fas fa-star rating-color"></i></span>
+        } @if(shareproduct.ratingsAverage%1!==0){
+        <i class="fa-solid fa-star-half-stroke rating-color"></i>
+        }
+        <span>{{ shareproduct.ratingsAverage }}</span>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="addproducttocart(shareproduct.id)" class="btn-main w-100">
+
+    @if (isloading) {
+      <span class="fas fa-spin fa-spinner"></span>
+    }
+    
+    @else {
+      Add to Cart
+    }
+  </button>
+</div>

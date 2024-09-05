@@ -1,0 +1,86 @@
+ @if (allorders.length!==0) {
+    <section class="bg-nain-light shadow p-3 my-5 text-center rounded-4">
+        <h1 class="text-center my-2 h3 "> All products you ordered from our website  </h1>
+        <div class="border-bottom border-info     my-2"></div>
+          <div class="row  text-center ms-auto  ">
+            @for (item of allorders; track $index) {
+             <div class="d-flex justify-content-between align-items-center">
+                <h3 class="text-center text-success h6"> total order price in this proccess : {{item.totalOrderPrice}}LE </h3>
+                <h3 class="text-center text-muted my-1 h6"> order Number : {{item.id}} </h3>
+             </div>
+                <div class="row g-4 justify-content-center">
+                    @for (p of item.cartItems; track $index) {
+                        <div class="col-lg-3">
+                            <div class="card product  h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center  ">
+                                     <p>count:{{p.count}}</p>
+                                     <p>price piece:{{p.price}}</p>
+                                    </div>
+                                        <div >
+                                         <img [src]="p.product.imageCover" class="card-img" [alt]="p.product.title">
+                                         <p>{{p.product.title}}</p>
+                                        </div>
+                                </div>
+                                </div>
+                        </div>
+                      
+                       }
+                </div>
+                    
+                       
+                       <div class="border-bottom border-danger  my-4"></div>
+               }
+          </div>
+    </section>
+}
+
+
+
+@else {
+    <h5>No order !!!! if you want show product</h5>
+    <button class="btn-main" routerLink="/home">Go to add buy product</button>
+} 
+
+
+
+<!-- @for (item of allorders; track $index) {
+  
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <p class="text-center text-info my-1"> order Number : {{item.id}} </p>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="row g-4">
+                    @for (p of item.cartItems; track $index) {
+                        <div class="col-md-3">
+                            <div class="card product  h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center  ">
+                                     <p>count:{{p.count}}</p>
+                                     <p>price piece:{{p.price}}</p>
+                                    </div>
+                                        <div >
+                                         <img [src]="p.product.imageCover" class="card-img" [alt]="p.product.title">
+                                         <p>{{p.product.title}}</p>
+                                        </div>
+                                </div>
+                                </div>
+                        </div>
+                      
+                       }
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        
+           
+           <div class="border-bottom border-danger  my-4"></div>
+   } -->
+

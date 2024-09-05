@@ -1,0 +1,82 @@
+@if(step===1){
+    <section  class="bg-main-light shadow p-4 my-3">
+        <h5 class="text-main text-center">Verifify Your Email :</h5>
+        <form (ngSubmit)="setemailverify()"  [formGroup]="verififyEmail"  >
+          <div class="my-2">
+            <label for="email">Your Email:</label>
+            <input formControlName="email" class="form-control" type="email" name="email" id="email">
+          </div>
+          @if(verififyEmail.get('email')?.getError('email')&&(verififyEmail.touched||verififyEmail.dirty)){
+               <p class="alert alert-info text-center">You Must contain gmail.com </p>
+          }
+          <button [disabled]="verififyEmail.invalid||loadingemail" class="btn-main w-100 d-block my-2">
+            Submit
+            @if(loadingemail){
+                <span class="fas fa-spin fa-spinner"></span>
+            }
+        </button>
+        <p class="text-center text-danger">{{msgemail}}</p>
+        </form>
+    </section>
+}
+
+<!-- !=============================================== -->
+
+
+@if(step===2){
+    <section class="bg-main-light shadow p-4 my-3">
+        <h5 class="text-main text-center">Verifify Your code :</h5>
+        <form (ngSubmit)="setCodeverify()" [formGroup]="verifiycode">
+               <div class="my-2">
+                <label for="Code">Your Code:</label>
+                <input formControlName="resetCode" class="form-control" type="text" name="Code" id="Code">
+    
+               </div>
+               @if(verifiycode.get('resetCode')?.getError('pattern')&&(verifiycode.touched||verifiycode.dirty)){
+                <p class="alert alert-info text-center"> This Code contain 6 number </p>
+                }
+               <button [disabled]="verifiycode.invalid||loadingcode" class="btn-main w-100 d-block my-2">
+                Submit
+                @if(loadingcode){
+                    <span class="fas fa-spin fa-spinner"></span>
+                }
+            </button>
+        <p class="text-center text-danger">{{msgCode}}</p>
+             
+        </form>
+    </section>
+}
+
+<!-- !=============================================== -->
+
+
+@if(step===3){
+    <section class="bg-main-light shadow p-4 my-3">
+        <h5 class="text-main text-center">Update Your passowrd :</h5>
+        <form (ngSubmit)="setUpdatepass()" [formGroup]="verififyUpdate">
+            <div class="my-2">
+                <label for="email">Your Email:</label>
+                <input readonly formControlName="email" class="form-control" type="email" name="email" id="email">
+            </div>
+            @if(verififyUpdate.get('email')?.getError('email')&&(verififyUpdate.touched||verififyUpdate.dirty)){
+                <p class="alert alert-info text-center">You Must contain gmail.com </p>
+                }
+            <div class="my-2">
+                <label for="passowrd">Your new passowrd:</label>
+                <input formControlName="newPassword" class="form-control" type="password" name="passowrd" id="passowrd">
+            </div>
+            @if(verififyUpdate.get('newPassword')?.getError('pattern')&&(verififyUpdate.touched||verififyUpdate.dirty)){
+                <p class="alert alert-info text-center">The minimum password needs 6 values. The maximum number is 6</p>
+                }
+            <button [disabled]="verififyUpdate.invalid||loadingUpdate" class="btn-main w-100 d-block my-2">
+                Submit
+                @if(loadingUpdate){
+                    <span class="fas fa-spin fa-spinner"></span>
+                }
+            </button>
+           <p class="text-center text-danger">{{msgUpdate}}</p>
+        </form>
+    </section>
+}
+
+<!-- !=============================================== -->

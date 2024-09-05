@@ -1,0 +1,47 @@
+
+    @if (cartnumber!==0) {
+        <section class="my-5 w-75 p-3 m-auto shadow bg-main-light shadow rounded">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 class=" my-2">Shop Cart</h2>
+              <button  (click)="ClearCart()"  class="btn btn-success">Clear All products in  Cart</button>
+            </div>
+            <h6 class="small text-main my-2">Total Cart Price : {{cartItemsDisplay.totalCartPrice}}  </h6>
+            <h6 class="text-center text-success">number of product in card : {{cartItem}}</h6>
+        
+            @for (item of cartItemsDisplay.products; track item.product.id) {
+           
+                <div class="row border-bottom mt-2">
+                  <div class="col-md-2">
+                      <div>
+                          <img class="w-100" [src]="item.product.imageCover" [alt]="item.product.title">
+                      </div>
+                  </div>
+                  <div class="col-md-10">
+                      <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                              <h5 class="my-2">{{item.product.title}}</h5>
+                              <p class="my-2 text-main"> price :{{item.price}}</p>
+                              <span  (click)="RomovespecificCart(item.product.id)" ><i class="fa-solid fa-trash-can text-danger fa-xl cr"></i></span>
+                           </div>
+                           <div class="d-flex ">
+                            <span   (click)="updateCart(item.product.id,item.count +1)" >  <i class="fa-solid fa-circle-plus fa-2xl text-main cr"></i></span>
+                            <p class="px-2">{{item.count}}</p>
+                            <span  (click)="updateCart(item.product.id,item.count -1)" >  <i class="fa-solid fa-circle-minus fa-2xl text-danger cr  "></i></span>
+                           </div>
+                      </div>
+                      
+                  </div>
+                </div>
+            }
+        
+            <button [routerLink]="['/formorder',cartItemsDisplay._id]"   class="btn btn-info w-100 text-white  my-2">Order By Visa</button>
+            <button [routerLink]="['/formcash',cartItemsDisplay._id]"   class="btn btn-danger w-100  text-white my-2">Order By cash</button>
+            
+        
+        </section> 
+    }
+
+ @else {
+    <h5 >No product in cart  !!!! if you want add product in cart </h5>
+    <button class="btn-main" routerLink="/home">Go to add product</button>
+} 

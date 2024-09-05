@@ -1,0 +1,85 @@
+<!--! 2- ======================== Design Form ======================== -->
+<!--! 3- ======================== link input to form ======================== -->
+
+<section class="bg-main-light shadow-lg w-75 m-auto p-2 rounded-4 my-5 p-5">
+  <h1 class="h4 text-main p-4">Login Now :</h1>
+  <form (ngSubmit)="LoginInHome()"  [formGroup]="LoginForm" class="m-3">
+    <div class="my-2">
+      <label for="Email">Email:</label>
+      <input
+       
+      [ngClass]="
+      {
+        'is-valid':!LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched||LoginForm.get('email')?.dirty),
+        'is-invalid':LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched||LoginForm.get('email')?.dirty)
+      }
+      "
+
+        formControlName="email"
+        id="Email"
+        type="email"
+        class="form-control"
+      />
+
+      @if(LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched||LoginForm.get('email')?.dirty)){
+      <div class="alert alert-danger my-2">
+        @if(LoginForm.get('email')?.getError('required')){
+        <p class="m-0">This Input Is Required</p>
+        } @else if (LoginForm.get('email')?.getError('email')) {
+        <p class="m-0">You Must contain gmail.com</p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="my-2">
+      <label for="passowrd">passowrd:</label>
+      <input
+       
+      [ngClass]="
+      {
+        'is-valid':!LoginForm.get('password')?.errors && (LoginForm.get('password')?.touched||LoginForm.get('password')?.dirty),
+        'is-invalid':LoginForm.get('password')?.errors && (LoginForm.get('password')?.touched||LoginForm.get('password')?.dirty)
+      }
+      "
+
+        formControlName="password"
+        id="passowrd"
+        type="password"
+        class="form-control"
+      />
+      @if(LoginForm.get('password')?.errors &&(LoginForm.get('password')?.touched||LoginForm.get('password')?.dirty))
+      {
+      <div class="alert alert-danger my-2">
+        @if(LoginForm.get('password')?.getError('required')){
+        <p class="m-0">This Input Is Required</p>
+        } @else if (LoginForm.get('password')?.getError('pattern')) {
+        <p class="m-0">
+          The minimum password needs 6 values. The maximum number is 6
+        </p>
+        }
+      </div>
+      }
+    </div>
+
+    <button [disabled]="LoginForm.invalid || isShow " class="btn-main d-block ms-auto my-2">
+        Login
+       @if(isShow){
+        <span class="fas fa-spin fa-spinner"></span>
+       }
+    </button>
+
+    <a routerLink="/forget" class="text-center link ">Forget passowrd</a>
+
+    @if(msgError){
+        <p class="p-2 m-0 alert alert-danger text-center ">{{msgError}}</p>
+    }
+
+    @if(msgSuccess){
+      <p class="p-2 m-0 alert alert-danger text-center text-info fs-6 ">Success</p>
+    }
+
+   <a routerLink="/register" class="text-center d-block link">You don't have an account?</a>
+
+  </form>
+</section>
